@@ -12,6 +12,9 @@ typedef struct Node {
   Set *set;
 } Node;
 
+// Devuelve el representate del conjunto del nodo x
 int findSet(Node *x);
+// Unir el conjunto de x con el conjunto y, manteniendo el representate de x
+void unite(Node *x, Node *y);
 
 #endif // !
