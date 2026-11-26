@@ -25,7 +25,7 @@ void destroyDSU(DSU *dsu);
 int findSet(Node *x);
 
 // Crear un conjunto para value
-Node *makeSet(int value);
+Node *makeSet(DSU *dsu, int value);
 
 // Unir el conjunto de x con el conjunto y, manteniendo el representate de x
 int unite(DSU *dsu, Node *x, Node *y);

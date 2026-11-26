@@ -1,7 +1,7 @@
 #include "dsu-simple-union.h"
 #include <stdlib.h>
 
-Node *makeSet(int value) {
+Node *makeSet(DSU *dsu, int value) {
   Set *set = malloc(sizeof(*set));
   if (!set)
     return NULL;
@@ -13,8 +13,12 @@ Node *makeSet(int value) {
   x->value = value;
   x->next = NULL;
   x->set = set;
+
   set->head = x;
   set->tail = x;
+
+  set->nextSet = dsu->sets;
+  dsu->sets = set;
 
   return x;
 }
