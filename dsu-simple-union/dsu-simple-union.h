@@ -28,6 +28,6 @@ int findSet(Node *x);
 Node *makeSet(int value);
 
 // Unir el conjunto de x con el conjunto y, manteniendo el representate de x
-void unite(Node *x, Node *y);
+int unite(DSU *dsu, Node *x, Node *y);
 
 #endif // !

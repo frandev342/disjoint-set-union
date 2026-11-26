@@ -24,9 +24,16 @@ int findSet(Node *x) {
   return x->set->head->value;
 }
 
-void unite(Node *x, Node *y) {
+int unite(DSU *dsu, Node *x, Node *y) {
+  if (x == NULL || y == NULL)
+    return 0;
   Set *A = x->set;
   Set *B = y->set;
+
+  // Preguntar si perteneccen al mismo conjunto, entoncesn no hacer nada
+  if (A == B)
+    return 0;
+
   // conectar lista B a la cola de la lista A
   A->tail->next = B->head;
   A->tail = B->tail; // actualizar cola de A
@@ -38,7 +45,16 @@ void unite(Node *x, Node *y) {
     current = current->next;
   };
   // Liberamos el conjunto B
+  Set *currentSet = dsu->sets;
+  if (currentSet == B) {
+    dsu->sets = currentSet->nextSet;
+  } else {
+    while (currentSet->nextSet != B)
+      currentSet = currentSet->nextSet;
+    currentSet->nextSet = B->nextSet;
+  }
   free(B);
+  return 1;
 }
 
 void initDSU(DSU *dsu) { dsu->sets = NULL; }
