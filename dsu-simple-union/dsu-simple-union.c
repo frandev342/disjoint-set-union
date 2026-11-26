@@ -40,3 +40,19 @@ void unite(Node *x, Node *y) {
   // Liberamos el conjunto B
   free(B);
 }
+
+void initDSU(DSU *dsu) { dsu->sets = NULL; }
+void destroyDSU(DSU *dsu) {
+  Set *currentSet = dsu->sets;
+  while (currentSet) {
+    Node *currentNode = currentSet->head;
+    while (currentSet) {
+      Node *nextNode = currentNode->next;
+      free(currentNode);
+      currentNode = nextNode;
+    }
+    Set *nextSet = currentSet->nextSet;
+    free(currentSet);
+    currentSet = nextSet;
+  }
+}

@@ -5,6 +5,7 @@
 typedef struct Set {
   struct Node *head;
   struct Node *tail;
+  struct Set *nextSet;
 } Set;
 
 typedef struct Node {
@@ -13,9 +14,17 @@ typedef struct Node {
   Set *set;
 } Node;
 
+typedef struct DSU {
+  Set *sets;
+} DSU;
+
+void initDSU(DSU *dsu);
+void destroyDSU(DSU *dsu);
+
 // Devuelve el representate del conjunto del nodo x
 int findSet(Node *x);
 
+// Crear un conjunto para value
 Node *makeSet(int value);
 
 // Unir el conjunto de x con el conjunto y, manteniendo el representate de x
