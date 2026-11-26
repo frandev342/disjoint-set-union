@@ -1,6 +1,24 @@
 #include "dsu-simple-union.h"
 #include <stdlib.h>
 
+Node *makeSet(int value) {
+  Set *set = malloc(sizeof(*set));
+  if (!set)
+    return NULL;
+
+  Node *x = malloc(sizeof(*x));
+  if (!x)
+    return NULL;
+
+  x->value = value;
+  x->next = NULL;
+  x->set = set;
+  set->head = x;
+  set->tail = x;
+
+  return x;
+}
+
 int findSet(Node *x) {
   // Devolver head->value, es nuestro representante
   return x->set->head->value;
