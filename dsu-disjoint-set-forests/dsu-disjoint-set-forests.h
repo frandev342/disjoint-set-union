@@ -7,10 +7,13 @@ typedef struct Node{
   Node* parent;
   int rank;
 } Node;
-
-Node *makeSet(int value); //Crea solo un nodo, rank = 0
-Node *findSet(Node *x); //Debe dejar los ranks sin cambios
-void link(Node *x, Node *y); //Une 2 sets, 2 casos, uno si ambos rangos son iguales o el otro si son distintos
-int unite(Node *x, Node *y); //Llama a la función link
+//Crea solo un nodo, rank = 0
+Node *makeSet(int value);
+//Debe dejar los ranks sin cambios
+Node *findSet(Node *x); 
+//Une 2 sets, 2 casos, uno si ambos rangos son iguales o el otro si son distintos
+void link(Node *x, Node *y);
+//Llama a la función link
+int unite(Node *x, Node *y);
 
 #endif
