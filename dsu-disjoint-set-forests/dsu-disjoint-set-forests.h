@@ -1,4 +1,3 @@
-#include "dsu-forest.h"
 #include <stdlib.h>
 
 // MAKE-SET(value): crea un árbol de un solo nodo
