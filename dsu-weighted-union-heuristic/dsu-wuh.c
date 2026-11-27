@@ -1,23 +1,22 @@
 #include "dsu-wuh.h"
 #include <stdlib.h>
 
-Node *makeSet(DSU *dsu, int value) {
+Node *makeSet(int value) {
   Node *x = malloc(sizeof(*x));
   if (!x)
     return NULL;
-  x->value = value;
-  x->next = NULL;
-  x->set = NULL;
-
   Set *set = malloc(sizeof(*set));
   if (!set)
     return NULL;
+
+  x->value = value;
+  x->next = NULL;
+  x->set = set;
+
   set->head = x;
   set->tail = x;
-  set->length = 0;
-  set->nextSet = 0;
+  set->length = 1;
 
-  dsu->sets = set;
   return x;
 }
 
@@ -27,15 +26,15 @@ Node *findSet(Node *x) {
   return x->set->head;
 }
 
-int unite(DSU *dsu, Node *x, Node *y) {
+void unite(Node *x, Node *y) {
   if (!x || !y)
-    return 0;
+    return;
   Set *A = x->set;
   Set *B = y->set;
 
   // Preguntar si pertenecen al mismo conjunto x e y
   if (A == B)
-    return 0;
+    return;
 
   Set *biggerSet, *smallerSet;
 
@@ -62,15 +61,6 @@ int unite(DSU *dsu, Node *x, Node *y) {
   }
 
   // Liberamos al pequeño
-  Set *currentSet = dsu->sets;
-  if (currentSet == smallerSet) {
-    dsu->sets = currentSet->nextSet;
-  } else {
-    // Buscamos el Set anterior al pequeño y arreglamos las conexiones
-    while (currentSet->nextSet != smallerSet)
-      currentSet = currentSet->nextSet;
-    currentSet->nextSet = smallerSet->nextSet;
-  }
   free(smallerSet);
-  return 1;
+  return;
 }

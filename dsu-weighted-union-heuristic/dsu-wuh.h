@@ -5,7 +5,6 @@ typedef struct Set {
   struct Node *head;
   struct Node *tail;
   int length;
-  struct Set *nextSet;
 } Set;
 
 typedef struct Node {
@@ -14,15 +13,8 @@ typedef struct Node {
   Set *set;
 } Node;
 
-typedef struct DSU {
-  Set *sets;
-} DSU;
-
-void initDSU(DSU *dsu);
-void destroyDSU(DSU *dsu);
-
 Node *findSet(Node *x);
-Node *makeSet(DSU *dsu, int value);
-int unite(DSU *dsu, Node *x, Node *y);
+Node *makeSet(int value);
+void unite(Node *x, Node *y);
 
 #endif // !
