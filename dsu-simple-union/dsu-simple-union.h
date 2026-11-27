@@ -22,7 +22,7 @@ void initDSU(DSU *dsu);
 void destroyDSU(DSU *dsu);
 
 // Devuelve el representate del conjunto del nodo x
-int findSet(Node *x);
+Node *findSet(Node *x);
 
 // Crear un conjunto para value
 Node *makeSet(DSU *dsu, int value);

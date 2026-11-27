@@ -23,9 +23,11 @@ Node *makeSet(DSU *dsu, int value) {
   return x;
 }
 
-int findSet(Node *x) {
+Node *findSet(Node *x) {
+  if (!x)
+    return NULL;
   // Devolver head->value, es nuestro representante
-  return x->set->head->value;
+  return x->set->head;
 }
 
 int unite(DSU *dsu, Node *x, Node *y) {
