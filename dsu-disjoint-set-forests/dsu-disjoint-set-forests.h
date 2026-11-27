@@ -1,5 +1,5 @@
-#ifndef "DISJOINTSETFORESTS_H"
-#define "DISJOINTSETFORESTS_H"
+#ifndef DISJOINTSETFORESTS_H
+#define DISJOINTSETFORESTS_H
 #include <stdlib.h>
 
 Node *makeSet(int value);
