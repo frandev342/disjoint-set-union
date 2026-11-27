@@ -49,7 +49,7 @@ int unite(DSU *dsu, Node *x, Node *y) {
   while (current) {
     current->set = A;
     current = current->next;
-  };
+  }
   // Liberamos el conjunto B
   Set *currentSet = dsu->sets;
   if (currentSet == B) {
