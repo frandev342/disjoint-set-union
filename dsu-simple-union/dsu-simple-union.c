@@ -1,7 +1,7 @@
 #include "dsu-simple-union.h"
 #include <stdlib.h>
 
-Node *makeSet(DSU *dsu, int value) {
+Node *makeSet(int value) {
   Set *set = malloc(sizeof(*set));
   if (!set)
     return NULL;
@@ -17,9 +17,6 @@ Node *makeSet(DSU *dsu, int value) {
   set->head = x;
   set->tail = x;
 
-  set->nextSet = dsu->sets;
-  dsu->sets = set;
-
   return x;
 }
 
@@ -30,15 +27,15 @@ Node *findSet(Node *x) {
   return x->set->head;
 }
 
-int unite(DSU *dsu, Node *x, Node *y) {
-  if (x == NULL || y == NULL)
-    return 0;
+void unite(Node *x, Node *y) {
+  if (!x || !y)
+    return;
   Set *A = x->set;
   Set *B = y->set;
 
   // Preguntar si perteneccen al mismo conjunto, entoncesn no hacer nada
   if (A == B)
-    return 0;
+    return;
 
   // conectar lista B a la cola de la lista A
   A->tail->next = B->head;
@@ -51,30 +48,5 @@ int unite(DSU *dsu, Node *x, Node *y) {
     current = current->next;
   }
   // Liberamos el conjunto B
-  Set *currentSet = dsu->sets;
-  if (currentSet == B) {
-    dsu->sets = currentSet->nextSet;
-  } else {
-    while (currentSet->nextSet != B)
-      currentSet = currentSet->nextSet;
-    currentSet->nextSet = B->nextSet;
-  }
   free(B);
-  return 1;
-}
-
-void initDSU(DSU *dsu) { dsu->sets = NULL; }
-void destroyDSU(DSU *dsu) {
-  Set *currentSet = dsu->sets;
-  while (currentSet) {
-    Node *currentNode = currentSet->head;
-    while (currentSet) {
-      Node *nextNode = currentNode->next;
-      free(currentNode);
-      currentNode = nextNode;
-    }
-    Set *nextSet = currentSet->nextSet;
-    free(currentSet);
-    currentSet = nextSet;
-  }
 }
