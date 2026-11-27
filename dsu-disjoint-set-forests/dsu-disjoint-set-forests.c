@@ -40,8 +40,7 @@ void link(Node *x, Node *y) {
   }
 }
 
-// UNION(x, y) [nombrada unite para mantener coherencia con tu código]:
-// busca las raíces de x e y y las enlaza si pertenecen a distintos conjuntos.
+// UNION(x, y)
 int unite(Node *x, Node *y) {
   if (!x || !y)
     return 0;
