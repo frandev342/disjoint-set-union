@@ -13,7 +13,20 @@ int initDSU(DSU *dsu, int capacity) {
   dsu->capacity = capacity;
   return 1;
 }
-int destroyDSU(DSU *dsu) {}
+void destroyDSU(DSU *dsu) {
+  if (!dsu)
+    return;
+  // Liberar nodos
+  for (int i = 0; i < dsu->capacity; ++i) {
+    free(dsu->nodes[i]);
+  }
+  // Liberar dsu
+  free(dsu->nodes);
+  // dejar en blanco al dsu
+  dsu->capacity = 0;
+  dsu->size = 0;
+  dsu->nodes = NULL;
+}
 
 // MAKE-SET(value): crea un árbol de un solo nodo
 Node *makeSet(DSU *dsu, int value) {
