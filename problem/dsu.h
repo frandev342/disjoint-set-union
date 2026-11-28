@@ -13,6 +13,9 @@ typedef struct DSU {
   int capacity;
 } DSU;
 
+int initDSU(DSU *dsu, int capacity);
+int destroyDSU(DSU *dsu);
+
 Node *makeSet(DSU *dsu, int value);
 Node *findSet(Node *x);
 void link(Node *x, Node *y);

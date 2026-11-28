@@ -1,6 +1,20 @@
 #include "dsu.h"
 #include <stdlib.h>
 
+int initDSU(DSU *dsu, int capacity) {
+  if (!dsu || capacity <= 0)
+    return 0;
+
+  // reservar memoria capacity*tamaño del nodo
+  dsu->nodes = malloc(capacity * sizeof(Node *));
+  if (!dsu->nodes)
+    return 0;
+  dsu->size = 0;
+  dsu->capacity = capacity;
+  return 1;
+}
+int destroyDSU(DSU *dsu) {}
+
 // MAKE-SET(value): crea un árbol de un solo nodo
 Node *makeSet(DSU *dsu, int value) {
   // Verificar dsu y capacidad
