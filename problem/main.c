@@ -13,7 +13,6 @@ int main() {
     if (!initDSU(&dsu, n))
         return 0;
 
-    // Creamos los n conjuntos (1..n); quedan en dsu.nodes[0..n-1]
     for (int i = 1; i <= n; i++) {
         makeSet(&dsu, i);
     }
@@ -35,7 +34,7 @@ int main() {
         }
     }
 
-    Node *base = findSet(dsu.nodes[0]); // Representante de la ciudad 1
+    Node *base = findSet(dsu.nodes[0]);
     int cand = 2;
 
     for (int i = 0; i < dia; i++) {
